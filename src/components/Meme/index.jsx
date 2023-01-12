@@ -1,16 +1,22 @@
+import React from "react";
 import meme from "../../assets/meme.png";
 import { memesData } from "../../datas/memesData";
 
-function handleClickMeme(e) {
-    e.preventDefault();
-    const keyRandomed = Math.floor(Math.random() * memesData.data.memes.length);
-    console.log(memesData.data.memes[keyRandomed].url);
-    document.getElementById("memeImg").src =
-        memesData.data.memes[keyRandomed].url;
-    return false;
-}
-
 function Meme() {
+    console.log(meme);
+    const [memeImage, setMemeImage] = React.useState(meme);
+
+    function handleClickMeme(e) {
+        e.preventDefault();
+        const keyRandomed = Math.floor(
+            Math.random() * memesData.data.memes.length
+        );
+        console.log(memesData.data.memes[keyRandomed].url);
+        // document.getElementById("memeImg").src =
+        //     memesData.data.memes[keyRandomed].url;
+        setMemeImage(memesData.data.memes[keyRandomed].url);
+    }
+
     return (
         <div className="Meme">
             <form className="form">
@@ -21,7 +27,7 @@ function Meme() {
             <img
                 onClick={handleClickMeme}
                 id="memeImg"
-                src={meme}
+                src={memeImage}
                 alt="Meme Img"
             />
         </div>
