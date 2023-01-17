@@ -1,20 +1,25 @@
 import React from "react";
-import meme from "../../assets/meme.png";
 import { memesData } from "../../datas/memesData";
 
 function Meme() {
-    console.log(meme);
-    const [memeImage, setMemeImage] = React.useState(meme);
+    const [memeImage, setMemeImage] = React.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "https://i.imgflip.com/1bij.jpg",
+    });
+
+    const [allMemeImages, setAllMemeImages] = React.useState(
+        memesData.data.memes
+    );
 
     function handleClickMeme(e) {
         e.preventDefault();
-        const keyRandomed = Math.floor(
-            Math.random() * memesData.data.memes.length
-        );
-        console.log(memesData.data.memes[keyRandomed].url);
-        // document.getElementById("memeImg").src =
-        //     memesData.data.memes[keyRandomed].url;
-        setMemeImage(memesData.data.memes[keyRandomed].url);
+        const keyRandomed = Math.floor(Math.random() * allMemeImages.length);
+        const url = allMemeImages[keyRandomed].url;
+        setMemeImage((prevMeme) => ({
+            ...prevMeme,
+            randomImage: url,
+        }));
     }
 
     return (
@@ -27,7 +32,7 @@ function Meme() {
             <img
                 onClick={handleClickMeme}
                 id="memeImg"
-                src={memeImage}
+                src={memeImage.randomImage}
                 alt="Meme Img"
             />
         </div>
