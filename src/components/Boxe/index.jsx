@@ -20,5 +20,5 @@ export default function Boxe(props) {
         setOn((prevOn) => !prevOn);
     }
 
-    return <div style={styles} className="box" onClick={handleClick}></div>;
+    return <div style={styles} className="box" onClick={props.toggle}></div>;
 }
