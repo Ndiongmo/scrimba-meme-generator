@@ -9,20 +9,36 @@ import React from "react";
 
 function App() {
     /**
-     * Challenge: Create a toggle() function that logs
-     * "clicked!" to the console
+     * Challenge: use setBoxe to update the
+     * correct boxe in the array.
      *
-     * Pass that function down to each of the Box components
-     * and set it up so when they get clicked it runs the function
+     * Make sure not to directly modify state!
+     *
+     * Hint: look back at the lesson on updating arrays
+     * in state if you need a reminder on how to do this
      */
     const [boxeData, setBoxe] = React.useState(boxesData);
-    console.log(boxeData);
 
-    function toggle() {
-        console.log("Clicked!!!");
+    function toggle(id) {
+        setBoxe((prevBoxes) => {
+            const newBoxes = [];
+            for (let i = 0; i < prevBoxes.length; i++) {
+                const currentBoxe = prevBoxes[i];
+                if (currentBoxe.id === id) {
+                    const updateBoxe = {
+                        ...currentBoxe,
+                        on: !currentBoxe.on,
+                    };
+                    newBoxes.push(updateBoxe);
+                } else {
+                    newBoxes.push(currentBoxe);
+                }
+            }
+            return newBoxes;
+        });
     }
     const boxeElements = boxeData.map((boxeD) => (
-        <Boxe on={boxeD.on} key={boxeD.id} toggle={toggle} />
+        <Boxe on={boxeD.on} key={boxeD.id} toggle={toggle} id={boxeD.id} />
     ));
 
     return (
