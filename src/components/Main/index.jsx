@@ -21,20 +21,26 @@ function App() {
 
     function toggle(id) {
         setBoxe((prevBoxes) => {
-            const newBoxes = [];
-            for (let i = 0; i < prevBoxes.length; i++) {
-                const currentBoxe = prevBoxes[i];
-                if (currentBoxe.id === id) {
-                    const updateBoxe = {
-                        ...currentBoxe,
-                        on: !currentBoxe.on,
-                    };
-                    newBoxes.push(updateBoxe);
-                } else {
-                    newBoxes.push(currentBoxe);
-                }
-            }
-            return newBoxes;
+            // const newBoxes = [];
+            // for (let i = 0; i < prevBoxes.length; i++) {
+            //     const currentBoxe = prevBoxes[i];
+            //     if (currentBoxe.id === id) {
+            //         const updateBoxe = {
+            //             ...currentBoxe,
+            //             on: !currentBoxe.on,
+            //         };
+            //         newBoxes.push(updateBoxe);
+            //     } else {
+            //         newBoxes.push(currentBoxe);
+            //     }
+            // }
+            // return newBoxes;
+            /**
+             * New Method with inline code : Boxes challenge part 5
+             */
+            return prevBoxes.map((boxe) => {
+                return boxe.id === id ? { ...boxe, on: !boxe.on } : boxe;
+            });
         });
     }
     const boxeElements = boxeData.map((boxeD) => (
